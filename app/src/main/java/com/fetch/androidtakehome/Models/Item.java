@@ -3,7 +3,7 @@ package com.fetch.androidtakehome.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Items {
+public class Item {
     @SerializedName("id")
     private int id;
 
