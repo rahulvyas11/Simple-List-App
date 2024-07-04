@@ -2,8 +2,10 @@ package com.fetch.androidtakehome;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +22,21 @@ public class ItemNameActivity extends AppCompatActivity {
     private ItemNameAdapter itemAdapter;
     private int listId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itemview);
+        Toolbar toolbar=findViewById(R.id.ListIDBar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         listId = getIntent().getIntExtra("listId", -1);
+        TextView textView=findViewById(R.id.ListIDTitle);
+        textView.setText("List "+listId);
+
 
         RecyclerView recyclerView = findViewById(R.id.ItemNameView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
