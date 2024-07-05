@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.fetch.androidtakehome.Models.Item;
-import com.fetch.androidtakehome.Repository.ItemsRepository;
+import com.fetch.androidtakehome.Repository.ItemRepository;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 
 public class ItemViewModel extends ViewModel {
 
-    private ItemsRepository itemsRepository;
+    private ItemRepository itemRepository;
     private LiveData<List<Item>> items;
 
     public ItemViewModel()
     {
-        itemsRepository = new ItemsRepository();
-        items = Transformations.map(itemsRepository.getItems(), this::sortItems);
+        itemRepository = new ItemRepository();
+        items = Transformations.map(itemRepository.getItems(), this::sortItems);
     }
 
     private List<Item> sortItems(List<Item> items) {

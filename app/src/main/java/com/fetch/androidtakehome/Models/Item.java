@@ -1,34 +1,39 @@
 package com.fetch.androidtakehome.Models;
 
-
 import com.google.gson.annotations.SerializedName;
 
 public class Item {
     @SerializedName("id")
-    private int id;
+    private Integer id;
 
     @SerializedName("listId")
-    private int listId;
+    private Integer listId;
 
     @SerializedName("name")
     private String name;
 
-    // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    // Getters and setters
+    public Integer getId() {
+        return id;
+    }
 
-    public int getListId() { return listId; }
-    public void setListId(int listId) { this.listId = listId; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public Integer getListId() {
+        return listId;
+    }
 
-    @Override
-    public String toString() {
-        return "Items{" +
-                "listId=" + listId +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public void setListId(Integer listId) {
+        this.listId = listId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

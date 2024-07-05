@@ -46,6 +46,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
 
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.core.testing)
+
 
 
 
