@@ -15,57 +15,56 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="8dp">
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:padding="8dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textview_listidcard_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="5dp">
+            android:text="List 0"
+            android:textColor="@color/fetch_blue"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_listidcard_itemcount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textview_listidcard_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/fetch_blue"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/textview_listidcard_itemcount"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textview_listidcard_itemcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of items: 0"
+            android:textColor="@color/fetch_blue"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerview_namecard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_listidcard_title" />
 
-            <TextView
-                android:id="@+id/textview_listidcard_itemcount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/fetch_blue"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textview_listidcard_title" />
-
-            <ImageButton
-                android:id="@+id/imgbutton_listidcard_expand"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Expand"
-                app:srcCompat="@drawable/listid_expand_24dp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/imgbutton_listidcard_expand"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Expand"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerview_namecard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/listid_expand_24dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_namecard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_listidcard_itemcount" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

@@ -24,7 +24,7 @@ public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemNa
     @NonNull
     @Override
     public ItemNameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_name_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_name_row, parent, false);
         return new ItemNameViewHolder(view);
     }
 
@@ -44,7 +44,7 @@ public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemNa
 
         public ItemNameViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemName = itemView.findViewById(R.id.textview_namecard_title);
+            itemName = itemView.findViewById(R.id.textview_namerow_title);
         }
     }
 }
