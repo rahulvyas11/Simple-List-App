@@ -1,86 +1,94 @@
 package com.fetch.androidtakehome.Adapter;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fetch.androidtakehome.R;
+import com.fetch.androidtakehome.Models.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIdViewHolder> {
+public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDViewHolder> {
 
-    private List<Integer> listIds;
-    private Map<Integer, Long> itemCountMap;
-    private OnItemClickListener listener;
+    private Context context;
+    private List<Map.Entry<Integer, List<Item>>> itemsGrouped;
+    private List<Boolean> expandedStates;
 
-    public interface OnItemClickListener {
-        void onItemClick(int listId);
-    }
-
-    public ListIDAdapter(List<Integer> listIds, OnItemClickListener listener) {
-        this.listIds = listIds;
-        this.listener = listener;
+    public ListIDAdapter(Context context, List<Item> items) {
+        this.context = context;
+        this.itemsGrouped = items.stream()
+                .filter(item -> item.getName() != null && !item.getName().isEmpty())
+                .collect(Collectors.groupingBy(Item::getListId))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toList());
+        this.expandedStates = new ArrayList<>(itemsGrouped.size());
+        for (int i = 0; i < itemsGrouped.size(); i++) {
+            expandedStates.add(false);
+        }
     }
 
     @NonNull
     @Override
-    public ListIdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_listid_row, parent, false);
-        return new ListIdViewHolder(view);
+    public ListIDViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listid_card, parent, false);
+        return new ListIDViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListIdViewHolder holder, int position) {
-        int listId = listIds.get(position);
-        holder.listIdTextView.setText("List " + listId);
-        holder.itemCountTextView.setText("Number of items: " + itemCountMap.get(listId));
+    public void onBindViewHolder(@NonNull ListIDViewHolder holder, int position) {
+        Map.Entry<Integer, List<Item>> entry = itemsGrouped.get(position);
+        holder.textView.setText("List " + entry.getKey());
+        holder.itemCount.setText("Number of items: " + entry.getValue().size());
 
-        if (holder.cardView != null) {
-            holder.cardView.setOnClickListener(v -> listener.onItemClick(listId));
-        } else {
-            Log.e("ListIDAdapter", "CardView is null in onBindViewHolder");
-        }
+        boolean isExpanded = expandedStates.get(position);
+        holder.expandButton.setOnClickListener(v -> {
+            expandedStates.set(position, !isExpanded);
+            notifyItemChanged(position);
+        });
+        holder.expandButton.setImageResource(isExpanded ? R.drawable.listid_minimize_24dp : R.drawable.listid_expand_24dp);
+        holder.expandButton.setContentDescription(isExpanded? "minimize":"expand");
+        holder.itemsRecyclerView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        ItemNameAdapter itemNameAdapter = new ItemNameAdapter(entry.getValue());
+        holder.itemsRecyclerView.setAdapter(itemNameAdapter);
+
     }
 
     @Override
     public int getItemCount() {
-        return listIds.size();
+        return itemsGrouped.size();
     }
 
-    public static class ListIdViewHolder extends RecyclerView.ViewHolder {
-        private final TextView listIdTextView;
-        private final TextView itemCountTextView;
-        private final CardView cardView;
+    public static class ListIDViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+        TextView itemCount;
+        CardView cardView;
+        ImageButton expandButton;
+        RecyclerView itemsRecyclerView;
 
-        public ListIdViewHolder(View itemView) {
+        public ListIDViewHolder(@NonNull View itemView) {
             super(itemView);
-            listIdTextView = itemView.findViewById(R.id.listName);
-            itemCountTextView = itemView.findViewById(R.id.itemCount);
-            cardView = itemView.findViewById(R.id.listCard);
 
-            if (listIdTextView == null) {
-                Log.e("ListIDAdapter", "TextView (listIdTextView) is null in ViewHolder");
-            }
-            if (itemCountTextView == null) {
-                Log.e("ListIDAdapter", "TextView (itemCountTextView) is null in ViewHolder");
-            }
-            if (cardView == null) {
-                Log.e("ListIDAdapter", "CardView (listCard) is null in ViewHolder");
-            }
+            textView = itemView.findViewById(R.id.textview_listidcard_title);
+            itemCount = itemView.findViewById(R.id.textview_listidcard_itemcount);
+            cardView = itemView.findViewById(R.id.cardview_listid_content);
+            expandButton = itemView.findViewById(R.id.imgbutton_listidcard_expand);
+            itemsRecyclerView = itemView.findViewById(R.id.recyclerview_namecard);
+            itemsRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
-    }
-
-    public void updateListIds(List<Integer> newListIds, Map<Integer, Long> itemCountMap) {
-        this.listIds = newListIds;
-        this.itemCountMap = itemCountMap;
-        notifyDataSetChanged();
     }
 }

@@ -1,39 +1,62 @@
 package com.fetch.androidtakehome.Models;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class Item implements Parcelable {
     @SerializedName("id")
-    private Integer id;
+    private int id;
 
     @SerializedName("listId")
-    private Integer listId;
+    private int listId;
 
     @SerializedName("name")
     private String name;
 
-    // Getters and setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public Item(int id, int listId, String name) {
         this.id = id;
-    }
-
-    public Integer getListId() {
-        return listId;
-    }
-
-    public void setListId(Integer listId) {
         this.listId = listId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
+
+    protected Item(Parcel in) {
+        id = in.readInt();
+        listId = in.readInt();
+        name = in.readString();
+    }
+
+    public static final Creator<Item> CREATOR = new Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(listId);
+        dest.writeString(name);
+    }
+
+    // Getters and setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public int getListId() { return listId; }
+    public void setListId(int listId) { this.listId = listId; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }

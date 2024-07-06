@@ -11,24 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fetch.androidtakehome.R;
 import com.fetch.androidtakehome.Models.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemViewHolder>{
+public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemNameViewHolder> {
 
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items;
+
+    public ItemNameAdapter(List<Item> items) {
+        this.items = items;
+    }
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_itemname_row, parent, false);
-        return new ItemViewHolder(view);
+    public ItemNameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_name_card, parent, false);
+        return new ItemNameViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemNameViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.nameTextView.setText(item.getName());
+        holder.itemName.setText(item.getName());
     }
 
     @Override
@@ -36,18 +39,12 @@ public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemVi
         return items.size();
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-        notifyDataSetChanged();
-    }
+    public static class ItemNameViewHolder extends RecyclerView.ViewHolder {
+        TextView itemName;
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        private final TextView nameTextView;
-
-        public ItemViewHolder(View itemView) {
+        public ItemNameViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.itemName);
+            itemName = itemView.findViewById(R.id.textview_namecard_title);
         }
     }
-
 }

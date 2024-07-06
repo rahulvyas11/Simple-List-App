@@ -5,16 +5,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    private static Retrofit retrofit = null;
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://fetch-hiring.s3.amazonaws.com/";
 
-    public static Retrofit getClient() {
+    public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://fetch-hiring.s3.amazonaws.com/")
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
-
 }
