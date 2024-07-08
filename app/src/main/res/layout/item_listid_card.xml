@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_listid_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,7 +24,6 @@
             android:id="@+id/textview_listidcard_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="List 0"
             android:textColor="@color/fetch_blue"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/textview_listidcard_itemcount"
@@ -36,7 +34,6 @@
             android:id="@+id/textview_listidcard_itemcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of items: 0"
             android:textColor="@color/fetch_blue"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/recyclerview_namecard"
@@ -65,6 +62,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,5 @@
 package com.fetch.androidtakehome.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fetch.androidtakehome.Model.Item;
 import com.fetch.androidtakehome.R;
-import com.fetch.androidtakehome.Models.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +21,11 @@ import java.util.stream.Collectors;
 
 public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDViewHolder> {
 
-    private Context context;
-    private List<Map.Entry<Integer, List<Item>>> itemsGrouped;
-    private List<Boolean> expandedStates;
+    private final List<Map.Entry<Integer, List<Item>>> itemsGrouped;
+    private final List<Boolean> expandedStates;
 
-    public ListIDAdapter(Context context, List<Item> items) {
-        this.context = context;
+    public ListIDAdapter(List<Item> items) {
         this.itemsGrouped = items.stream()
-                .filter(item -> item.getName() != null && !item.getName().isEmpty())
                 .collect(Collectors.groupingBy(Item::getListId))
                 .entrySet()
                 .stream()
@@ -59,12 +55,15 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
             expandedStates.set(position, !isExpanded);
             notifyItemChanged(position);
         });
-        holder.expandButton.setImageResource(isExpanded ? R.drawable.listid_minimize_24dp : R.drawable.listid_expand_24dp);
-        holder.expandButton.setContentDescription(isExpanded? "minimize":"expand");
-        holder.itemsRecyclerView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
+
+        holder.expandButton.setImageResource(isExpanded ? R.drawable.listid_minimize_24dp : R.drawable.listid_expand_24dp);
+        holder.expandButton.setContentDescription(isExpanded ? "less" : "more");
+
+        RecyclerView itemsRecyclerView = holder.itemsRecyclerView;
+        itemsRecyclerView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         ItemNameAdapter itemNameAdapter = new ItemNameAdapter(entry.getValue());
-        holder.itemsRecyclerView.setAdapter(itemNameAdapter);
+        itemsRecyclerView.setAdapter(itemNameAdapter);
 
     }
 
@@ -89,6 +88,7 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
             expandButton = itemView.findViewById(R.id.imgbutton_listidcard_expand);
             itemsRecyclerView = itemView.findViewById(R.id.recyclerview_namecard);
             itemsRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+
         }
     }
 }

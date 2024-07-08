@@ -5,9 +5,7 @@
     android:id="@+id/constraintlayout_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    app:contentPaddingBottom="5dp"
-    app:contentPaddingTop="5dp">
+  >
 
     <TextView
         android:id="@+id/textview_namerow_title"

@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
+    testImplementation (libs.mockwebserver)
+    testImplementation (libs.core.testing.v210)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
@@ -45,6 +47,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
+
 
     testImplementation (libs.mockito.core)
     testImplementation (libs.core.testing)

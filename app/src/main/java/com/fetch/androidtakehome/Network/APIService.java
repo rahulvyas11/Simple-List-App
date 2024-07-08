@@ -1,5 +1,5 @@
 package com.fetch.androidtakehome.Network;
-import com.fetch.androidtakehome.Models.Item;
+import com.fetch.androidtakehome.Model.Item;
 
 import java.util.List;
 

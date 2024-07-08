@@ -1,6 +1,8 @@
 package com.fetch.androidtakehome.View;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,24 +15,29 @@ import com.fetch.androidtakehome.ViewModel.ItemViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView listRecyclerView;
     private ListIDAdapter listIDAdapter;
     private ItemViewModel itemViewModel;
+    private TextView noItemsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerview_main_listidcard);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listRecyclerView = findViewById(R.id.recyclerview_main_listidcard);
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        noItemsTextView = findViewById(R.id.textview_main_nolists);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         itemViewModel.getItems().observe(this, items -> {
-            if (items != null) {
-                listIDAdapter = new ListIDAdapter(MainActivity.this, items);
-                recyclerView.setAdapter(listIDAdapter);
+            if (items != null && !items.isEmpty()) {
+                listIDAdapter = new ListIDAdapter(items);
+                listRecyclerView.setAdapter(listIDAdapter);
+            } else {
+                listRecyclerView.setVisibility(View.GONE);
+                noItemsTextView.setVisibility(View.VISIBLE);
             }
         });
     }

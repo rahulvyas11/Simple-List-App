@@ -8,14 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fetch.androidtakehome.Model.Item;
 import com.fetch.androidtakehome.R;
-import com.fetch.androidtakehome.Models.Item;
 
 import java.util.List;
 
 public class ItemNameAdapter extends RecyclerView.Adapter<ItemNameAdapter.ItemNameViewHolder> {
 
-    private List<Item> items;
+    private final List<Item> items;
 
     public ItemNameAdapter(List<Item> items) {
         this.items = items;

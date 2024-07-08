@@ -3,7 +3,7 @@ package com.fetch.androidtakehome.Repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fetch.androidtakehome.Models.Item;
+import com.fetch.androidtakehome.Model.Item;
 import com.fetch.androidtakehome.Network.APIClient;
 import com.fetch.androidtakehome.Network.APIService;
 
@@ -15,10 +15,14 @@ import retrofit2.Response;
 
 public class ItemRepository {
 
-    private APIService apiService;
+    private final APIService apiService;
 
     public ItemRepository() {
-        apiService = APIClient.getRetrofitInstance().create(APIService.class);
+        this(APIClient.getRetrofitInstance().create(APIService.class));
+    }
+
+    public ItemRepository(APIService apiService) {
+        this.apiService = apiService;
     }
 
     public LiveData<List<Item>> getItems() {
@@ -28,12 +32,15 @@ public class ItemRepository {
             public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     data.setValue(response.body());
+                } else {
+                    data.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Item>> call, Throwable t) {
-                // Handle failure
+
+                data.setValue(null);
             }
         });
         return data;
