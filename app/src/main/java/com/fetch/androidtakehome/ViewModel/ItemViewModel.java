@@ -3,10 +3,9 @@ package com.fetch.androidtakehome.ViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-
 import com.fetch.androidtakehome.Model.Item;
 import com.fetch.androidtakehome.Repository.ItemRepository;
-
+import com.fetch.androidtakehome.Repository.ItemRepositoryInterface;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -14,11 +13,16 @@ import java.util.stream.Collectors;
 
 public class ItemViewModel extends ViewModel {
 
-    private final ItemRepository itemRepository;
-    private final LiveData<List<Item>> items;
+    private ItemRepositoryInterface itemRepository;
+    private LiveData<List<Item>> items;
 
     public ItemViewModel() {
-        itemRepository = new ItemRepository();
+        this(new ItemRepository());
+    }
+
+    public ItemViewModel(ItemRepositoryInterface itemRepository) {
+
+        this.itemRepository = itemRepository;
         items = Transformations.map(itemRepository.getItems(), this::filterAndSortItems);
     }
 
@@ -37,6 +41,4 @@ public class ItemViewModel extends ViewModel {
     public LiveData<List<Item>> getItems() {
         return items;
     }
-
 }
-

@@ -2,20 +2,17 @@ package com.fetch.androidtakehome.Repository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.fetch.androidtakehome.Model.Item;
 import com.fetch.androidtakehome.Network.APIClient;
 import com.fetch.androidtakehome.Network.APIService;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemRepository {
+public class ItemRepository implements ItemRepositoryInterface {
 
-    private final APIService apiService;
+    private APIService apiService;
 
     public ItemRepository() {
         this(APIClient.getRetrofitInstance().create(APIService.class));
@@ -25,6 +22,8 @@ public class ItemRepository {
         this.apiService = apiService;
     }
 
+
+    @Override
     public LiveData<List<Item>> getItems() {
         MutableLiveData<List<Item>> data = new MutableLiveData<>();
         apiService.getItems().enqueue(new Callback<List<Item>>() {
@@ -39,7 +38,6 @@ public class ItemRepository {
 
             @Override
             public void onFailure(Call<List<Item>> call, Throwable t) {
-
                 data.setValue(null);
             }
         });
