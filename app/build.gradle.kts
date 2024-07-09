@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+
 android {
     namespace = "com.fetch.androidtakehome"
     compileSdk = 34
@@ -44,16 +45,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.mockwebserver)
-    testImplementation(libs.core.testing.v210)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.core)
-    testImplementation(libs.core.testing)
-    testImplementation(libs.robolectric.v451)
-    testImplementation(libs.powermock.module.junit4)
-    testImplementation(libs.powermock.api.mockito2)
-
+    testImplementation (libs.junit)
+    testImplementation (libs.mockito.core.v3112)
+    testImplementation (libs.core.testing)
+    testImplementation (libs.mockwebserver.v491)
 
     androidTestImplementation(libs.espresso.contrib)
     androidTestImplementation(libs.runner)
@@ -63,3 +58,5 @@ dependencies {
     androidTestImplementation(libs.hamcrest.library)
 
 }
+
+

@@ -25,16 +25,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initViews();
+        setupRecyclerView();
+        setupViewModel();
+        observeViewModel();
+    }
+
+    private void initViews() {
         listRecyclerView = findViewById(R.id.recyclerview_main_listidcard);
-        listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         noItemsTextView = findViewById(R.id.textview_main_nolists);
+    }
 
+    private void setupRecyclerView() {
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setupViewModel() {
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+    }
 
+    private void observeViewModel() {
         itemViewModel.getItems().observe(this, items -> {
             if (items != null && !items.isEmpty()) {
                 listIDAdapter = new ListIDAdapter(items);
                 listRecyclerView.setAdapter(listIDAdapter);
+                listRecyclerView.setVisibility(View.VISIBLE);
+                noItemsTextView.setVisibility(View.GONE);
             } else {
                 listRecyclerView.setVisibility(View.GONE);
                 noItemsTextView.setVisibility(View.VISIBLE);

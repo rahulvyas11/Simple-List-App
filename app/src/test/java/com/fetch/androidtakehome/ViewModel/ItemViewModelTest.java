@@ -130,6 +130,23 @@ public class ItemViewModelTest {
         assertEquals("Item 1", items.get(0).getName());
         assertEquals("Item 6", items.get(1).getName());
     }
+    @Test
+    public void testGetItems_nullResponse() throws InterruptedException {
+        MutableLiveData<List<Item>> liveData = (MutableLiveData<List<Item>>) itemRepository.getItems();
+        liveData.setValue(null);
+        LiveData<List<Item>> observedItems = itemViewModel.getItems();
+        CountDownLatch latch = new CountDownLatch(1);
+        observedItems.observeForever(items -> {
+            if (items.isEmpty()) {
+                latch.countDown();
+            }
+        });
 
+        if (!latch.await(2, TimeUnit.SECONDS)) {
+            fail("Latch timed out");
+        }
+        List<Item> items = observedItems.getValue();
+        assertTrue(items.isEmpty());
+    }
 
 }

@@ -1,22 +1,10 @@
 package com.fetch.androidtakehome.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-public class Item implements Parcelable {
-    public static final Creator<Item> CREATOR = new Creator<Item>() {
-        @Override
-        public Item createFromParcel(Parcel in) {
-            return new Item(in);
-        }
+import java.io.Serializable;
 
-        @Override
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
+public class Item implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("listId")
@@ -28,24 +16,6 @@ public class Item implements Parcelable {
         this.id = id;
         this.listId = listId;
         this.name = name;
-    }
-
-    protected Item(Parcel in) {
-        id = in.readInt();
-        listId = in.readInt();
-        name = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(listId);
-        dest.writeString(name);
     }
 
     // Getters and setters

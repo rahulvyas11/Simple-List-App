@@ -73,9 +73,11 @@ public class ListIDAdapterUITest {
 
     @Test
     public void testExpandCollapse() {
+
         onView(withId(R.id.recyclerview_main_listidcard))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.imgbutton_listidcard_expand)))
                 .check(matches(hasDescendant(allOf(withId(R.id.recyclerview_namecard), isDisplayed()))));
+
 
         onView(withId(R.id.recyclerview_main_listidcard))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.imgbutton_listidcard_expand)))

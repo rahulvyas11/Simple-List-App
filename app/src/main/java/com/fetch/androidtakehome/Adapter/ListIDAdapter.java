@@ -25,17 +25,14 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
     private final List<Boolean> expandedStates;
 
     public ListIDAdapter(List<Item> items) {
-        this.itemsGrouped = items.stream()
-                .collect(Collectors.groupingBy(Item::getListId))
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey())
-                .collect(Collectors.toList());
+        this.itemsGrouped = groupAndSortItems(items);
         this.expandedStates = new ArrayList<>(itemsGrouped.size());
         for (int i = 0; i < itemsGrouped.size(); i++) {
             expandedStates.add(false);
         }
     }
+
+
 
     @NonNull
     @Override
@@ -56,7 +53,6 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
             notifyItemChanged(position);
         });
 
-
         holder.expandButton.setImageResource(isExpanded ? R.drawable.listid_minimize_24dp : R.drawable.listid_expand_24dp);
         holder.expandButton.setContentDescription(isExpanded ? "less" : "more");
 
@@ -64,16 +60,22 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
         itemsRecyclerView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         ItemNameAdapter itemNameAdapter = new ItemNameAdapter(entry.getValue());
         itemsRecyclerView.setAdapter(itemNameAdapter);
-
     }
 
     @Override
     public int getItemCount() {
         return itemsGrouped.size();
     }
-    public boolean isExpanded(int position) {
-        return expandedStates.get(position);
+
+    private List<Map.Entry<Integer, List<Item>>> groupAndSortItems(List<Item> items) {
+        return items.stream()
+                .collect(Collectors.groupingBy(Item::getListId))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toList());
     }
+
 
     public static class ListIDViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
@@ -84,14 +86,16 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
 
         public ListIDViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textView = itemView.findViewById(R.id.textview_listidcard_title);
             itemCount = itemView.findViewById(R.id.textview_listidcard_itemcount);
             cardView = itemView.findViewById(R.id.cardview_listid_content);
             expandButton = itemView.findViewById(R.id.imgbutton_listidcard_expand);
             itemsRecyclerView = itemView.findViewById(R.id.recyclerview_namecard);
             itemsRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
-
         }
+    }
+
+    protected List<Map.Entry<Integer, List<Item>>> getGroupedItemsForTesting() {
+        return itemsGrouped;
     }
 }
