@@ -71,6 +71,9 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
     public int getItemCount() {
         return itemsGrouped.size();
     }
+    public boolean isExpanded(int position) {
+        return expandedStates.get(position);
+    }
 
     public static class ListIDViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
