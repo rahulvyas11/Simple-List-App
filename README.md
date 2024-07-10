@@ -50,15 +50,17 @@ The app should now build and deploy to your selected device or emulator.
 #### ViewModel: Contains the ViewModel classes for managing UI-related data.
 1. ItemViewModel.java
 
+## res/layout: XML files for Views
+
 ## Instrumented Tests
 ### app/src/test/java/com/fetch/androidtakehome/androidtest/UITests 
-### Contains UI test classes using Espresso.
+#### Contains UI test classes using Espresso.
 1. ListCardUITest.java
 2. NameRowUITest.java
 
 ## Unit Tests
 ### app/src/test/java/com/fetch/androidtakehome/test
-### Contains Unit test classes using JUnit.
+#### Contains Unit test classes using JUnit.
 Unit Tests for Each Package
 
 
