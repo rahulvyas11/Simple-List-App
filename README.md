@@ -16,10 +16,11 @@ To clone the repository, follow these steps:
 3. Click on File -> Open and navigate to the cloned directory.
 4. Select the project and click OK.
 
-If while Building you see this message: Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.
-SDK location not found. Please right click on app-> select New -> Resource Bundle -> Name it local and paste the following code adjusting for your username:
-`sdk.dir=/Users/username/Android/sdk` (For Mac)
-`sdk.dir = C://Users//USERNAME//AppData//Local//Android//sdk` 
+If while Building you see this message: Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'. SDK location not found. Please right click on app-> select New -> Resource Bundle -> Name it local and paste the following code adjusting for your username:
+
+`sdk.dir = /home/USERNAME/Android/sdk` (For Mac)
+`sdk.dir = C://Users//USERNAME//AppData//Local//Android//sdk`(For Windows)
+
 And ensure you sync and build the project
 To run the app on an Android device or emulator:
 
