@@ -1,7 +1,12 @@
 package com.fetch.androidtakehome.Network;
 
-import com.fetch.androidtakehome.Model.Item;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import com.fetch.androidtakehome.Model.Item;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +20,6 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static org.junit.Assert.*;
 
 public class APIServiceTest {
 

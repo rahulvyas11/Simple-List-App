@@ -130,6 +130,7 @@ public class ItemViewModelTest {
         assertEquals("Item 1", items.get(0).getName());
         assertEquals("Item 6", items.get(1).getName());
     }
+
     @Test
     public void testGetItems_nullResponse() throws InterruptedException {
         MutableLiveData<List<Item>> liveData = (MutableLiveData<List<Item>>) itemRepository.getItems();

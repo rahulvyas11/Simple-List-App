@@ -1,12 +1,16 @@
 package com.fetch.androidtakehome.Network;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClientTest {
 

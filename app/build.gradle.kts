@@ -45,10 +45,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
 
-    testImplementation (libs.junit)
-    testImplementation (libs.mockito.core.v3112)
-    testImplementation (libs.core.testing)
-    testImplementation (libs.mockwebserver.v491)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core.v3112)
+    testImplementation(libs.core.testing)
+    testImplementation(libs.mockwebserver.v491)
 
     androidTestImplementation(libs.espresso.contrib)
     androidTestImplementation(libs.runner)

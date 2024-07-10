@@ -28,11 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemRepositoryTest {
 
-    private ItemRepository itemRepository;
-    private MockWebServer mockWebServer;
-
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+    private ItemRepository itemRepository;
+    private MockWebServer mockWebServer;
 
     @Before
     public void setUp() throws Exception {
