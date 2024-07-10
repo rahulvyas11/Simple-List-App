@@ -10,7 +10,7 @@ To clone the repository, follow these steps:
 
 1. Run the following command:
 
-`git clone https://github.com/yourusername/fetch-android-takehome.git`
+`git clone https://github.com/rahulvyas11/Simple-List-App.git`
 
 2. Open Android Studio.
 3. Click on File -> Open and navigate to the cloned directory.
