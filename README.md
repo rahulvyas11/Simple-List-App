@@ -51,13 +51,13 @@ The app should now build and deploy to your selected device or emulator.
 1. ItemViewModel.java
 
 ## Instrumented Tests
-## app/src/test/java/com/fetch/androidtakehome/androidtest/UITests 
+### app/src/test/java/com/fetch/androidtakehome/androidtest/UITests 
 ### Contains UI test classes using Espresso.
 1. ListCardUITest.java
 2. NameRowUITest.java
 
 ## Unit Tests
-## app/src/test/java/com/fetch/androidtakehome/test
+### app/src/test/java/com/fetch/androidtakehome/test
 ### Contains Unit test classes using JUnit.
 Unit Tests for Each Package
 
