@@ -1,8 +1,7 @@
 # Simple-List-App
-# Fetch Android Take-Home Project
 
 ## Overview
-This project my submission for Fetch take-home assignment. The application fetches a list of items from a remote server, groups them by list IDs, and displays them in a RecyclerView. Users can expand and collapse groups to view the items within.
+This project my submission for take-home assignment. The application fetches a list of items from a remote server, groups them by list IDs, and displays them in a RecyclerView. Users can expand and collapse groups to view the items within.
 
 ## How to Run:
 ### Clone Repository
