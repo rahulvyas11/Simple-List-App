@@ -50,7 +50,7 @@ The app should now build and deploy to your selected device or emulator.
 #### ViewModel: Contains the ViewModel classes for managing UI-related data.
 1. ItemViewModel.java
 
-## res/layout: XML files for Views
+#### res/layout: XML files for Views
 
 ## Instrumented Tests
 ### app/src/test/java/com/fetch/androidtakehome/androidtest/UITests 
