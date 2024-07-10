@@ -28,9 +28,11 @@ public class APIServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        // Initialize MockWebServer to mock HTTP responses
         mockWebServer = new MockWebServer();
         mockWebServer.start();
 
+        // Set up Retrofit with MockWebServer's URL and GsonConverterFactory
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(mockWebServer.url("/"))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -39,11 +41,13 @@ public class APIServiceTest {
         apiService = retrofit.create(APIService.class);
     }
 
+    // Clean up the test environment after each test
     @After
     public void tearDown() throws Exception {
         mockWebServer.shutdown();
     }
 
+    // Test successful response from the API
     @Test
     public void testGetItemsSuccess() throws Exception {
         String mockResponse = "[{\"id\":1,\"listId\":1,\"name\":\"Item 1\"},{\"id\":2,\"listId\":1,\"name\":\"Item 2\"},"
@@ -60,26 +64,27 @@ public class APIServiceTest {
         List<Item> items = response.body();
         assertNotNull(items);
         assertEquals(6, items.size());
-        assertEquals(1, items.get(0).getId());
-        assertEquals(1, items.get(0).getListId());
+        assertEquals(Integer.valueOf(1), items.get(0).getId());
+        assertEquals(Integer.valueOf(1), items.get(0).getListId());
         assertEquals("Item 1", items.get(0).getName());
-        assertEquals(2, items.get(1).getId());
-        assertEquals(1, items.get(1).getListId());
+        assertEquals(Integer.valueOf(2), items.get(1).getId());
+        assertEquals(Integer.valueOf(1), items.get(1).getListId());
         assertEquals("Item 2", items.get(1).getName());
-        assertEquals(3, items.get(2).getId());
-        assertEquals(2, items.get(2).getListId());
+        assertEquals(Integer.valueOf(3), items.get(2).getId());
+        assertEquals(Integer.valueOf(2), items.get(2).getListId());
         assertEquals("Item 3", items.get(2).getName());
-        assertEquals(4, items.get(3).getId());
-        assertEquals(2, items.get(3).getListId());
+        assertEquals(Integer.valueOf(4), items.get(3).getId());
+        assertEquals(Integer.valueOf(2), items.get(3).getListId());
         assertEquals("Item 4", items.get(3).getName());
-        assertEquals(5, items.get(4).getId());
-        assertEquals(3, items.get(4).getListId());
+        assertEquals(Integer.valueOf(5), items.get(4).getId());
+        assertEquals(Integer.valueOf(3), items.get(4).getListId());
         assertEquals("Item 5", items.get(4).getName());
-        assertEquals(8, items.get(5).getId());
-        assertEquals(4, items.get(5).getListId());
+        assertEquals(Integer.valueOf(8), items.get(5).getId());
+        assertEquals(Integer.valueOf(4), items.get(5).getListId());
         assertEquals("Item 6", items.get(5).getName());
     }
 
+    // Test empty response from the API
     @Test
     public void testGetItemsEmptyResponse() throws Exception {
         String mockResponse = "[]";
@@ -96,6 +101,7 @@ public class APIServiceTest {
         assertTrue(items.isEmpty());
     }
 
+    // Test error response from the API
     @Test
     public void testGetItemsErrorResponse() throws Exception {
         mockWebServer.enqueue(new MockResponse()

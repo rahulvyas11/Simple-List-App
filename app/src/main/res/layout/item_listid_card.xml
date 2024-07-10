@@ -24,8 +24,7 @@
             android:id="@+id/textview_listidcard_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/fetch_blue"
-            android:textSize="18sp"
+            android:textAppearance="@style/TextAppearance.Big.Title"
             app:layout_constraintBottom_toTopOf="@+id/textview_listidcard_itemcount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +33,7 @@
             android:id="@+id/textview_listidcard_itemcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/fetch_blue"
-            android:textStyle="italic"
+            android:textAppearance="@style/TextAppearance.Italic"
             app:layout_constraintBottom_toTopOf="@+id/recyclerview_namecard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_listidcard_title" />
@@ -45,7 +43,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Expand"
+            android:contentDescription="@string/main_more"
             app:layout_constraintBottom_toTopOf="@+id/recyclerview_namecard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

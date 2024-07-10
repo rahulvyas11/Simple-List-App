@@ -26,6 +26,10 @@ import okhttp3.mockwebserver.MockWebServer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Unit tests for the ItemRepository class.
+ * These tests ensure that the repository correctly fetches data from the API and handles various responses.
+ */
 public class ItemRepositoryTest {
 
     @Rule
@@ -52,7 +56,7 @@ public class ItemRepositoryTest {
         mockWebServer.shutdown();
     }
 
-
+    // Helper method to create and observe LiveData
     private @NonNull CountDownLatch getCountDownLatch() {
         LiveData<List<Item>> liveData = itemRepository.getItems();
         CountDownLatch latch = new CountDownLatch(1);
@@ -66,6 +70,7 @@ public class ItemRepositoryTest {
         return latch;
     }
 
+    // Test to ensure successful API response is handled correctly
     @Test
     public void testGetItems_successfulResponse() throws InterruptedException {
         String mockResponse = "[{\"id\":1,\"listId\":1,\"name\":\"Item 1\"}, {\"id\":2,\"listId\":1,\"name\":\"Item 2\"}]";
@@ -78,6 +83,7 @@ public class ItemRepositoryTest {
         }
     }
 
+    // Test to ensure 404 error response is handled correctly
     @Test
     public void testGetItems_failureResponse() throws InterruptedException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(404));
@@ -95,6 +101,7 @@ public class ItemRepositoryTest {
 
     }
 
+    // Test to ensure network failure is handled correctly
     @Test
     public void testGetItems_networkFailure() throws InterruptedException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));

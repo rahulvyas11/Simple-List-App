@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Unit tests for the ItemViewModel class.
+ * These tests ensure that the ViewModel correctly fetches and processes data from the repository.
+ */
 public class ItemViewModelTest {
 
     @Rule
@@ -42,6 +46,7 @@ public class ItemViewModelTest {
         itemViewModel = new ItemViewModel(itemRepository);
     }
 
+    // Test to ensure successful API response is handled correctly
     @Test
     public void testGetItems_successfulResponse() throws InterruptedException {
 
@@ -71,6 +76,7 @@ public class ItemViewModelTest {
         assertEquals("Item 2", items.get(1).getName());
     }
 
+    // Test to check functionality when itemrepository data is null
     @Test
     public void testGetItems_emptyResponse() throws InterruptedException {
 
@@ -95,6 +101,7 @@ public class ItemViewModelTest {
         assertTrue(items.isEmpty());
     }
 
+    // Test to check filteration of null items
     @Test
     public void testGetItems_nullItemsFiltered() throws InterruptedException {
         List<Item> mockItems = Arrays.asList(
@@ -104,8 +111,11 @@ public class ItemViewModelTest {
                 new Item(3, 1, " "),
                 null,
                 new Item(4, 2, "                "),
+                new Item(null, 4, "Item 5"),
+                new Item(8, null, "Item 8"),
                 new Item(6, 8, "Item 6"),
                 new Item(12, 4, null),
+                new Item(null, null, null),
                 null
         );
         MutableLiveData<List<Item>> liveData = (MutableLiveData<List<Item>>) itemRepository.getItems();
@@ -131,6 +141,7 @@ public class ItemViewModelTest {
         assertEquals("Item 6", items.get(1).getName());
     }
 
+    // Test to check null itemrepository
     @Test
     public void testGetItems_nullResponse() throws InterruptedException {
         MutableLiveData<List<Item>> liveData = (MutableLiveData<List<Item>>) itemRepository.getItems();
