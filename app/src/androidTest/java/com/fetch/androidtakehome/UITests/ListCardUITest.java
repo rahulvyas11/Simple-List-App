@@ -100,12 +100,12 @@ public class ListCardUITest {
 // Expand the first item and check if the nested RecyclerView is displayed
         onView(withId(R.id.recyclerview_main_listidcard))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.imgbutton_listidcard_expand)))
-                .check(matches(hasDescendant(allOf(withId(R.id.recyclerview_namecard), isDisplayed()))));
+                .check(matches(hasDescendant(allOf(withId(R.id.recyclerview_names), isDisplayed()))));
 
 // Collapse the first item and check if the nested RecyclerView is not displayed
         onView(withId(R.id.recyclerview_main_listidcard))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.imgbutton_listidcard_expand)))
-                .check(matches(hasDescendant(allOf(withId(R.id.recyclerview_namecard), not(isDisplayed())))));
+                .check(matches(hasDescendant(allOf(withId(R.id.recyclerview_names), not(isDisplayed())))));
     }
 
     // Test to check if the list titles are displayed correctly

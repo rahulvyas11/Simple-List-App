@@ -101,7 +101,7 @@ public class ListIDAdapter extends RecyclerView.Adapter<ListIDAdapter.ListIDView
             itemCount = itemView.findViewById(R.id.textview_listidcard_itemcount);
             listCardView = itemView.findViewById(R.id.cardview_listid_content);
             expandButton = itemView.findViewById(R.id.imgbutton_listidcard_expand);
-            itemsRecyclerView = itemView.findViewById(R.id.recyclerview_namecard);
+            itemsRecyclerView = itemView.findViewById(R.id.recyclerview_names);
             itemsRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
             itemNameAdapter = new ItemNameAdapter(new ArrayList<>());
             itemsRecyclerView.setAdapter(itemNameAdapter);

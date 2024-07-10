@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fetch.androidtakehome.Adapter.ListIDAdapter;
 import com.fetch.androidtakehome.R;
 import com.fetch.androidtakehome.ViewModel.ItemViewModel;
-
+/**
+ * Serves as the main entry point for the application.
+ * Responsible for setting up the UI components, initializing the ViewModel, and observing data changes.
+ * The activity displays a list of items grouped by their list IDs in a RecyclerView and handles UI interactions.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView listRecyclerView;  // RecyclerView to display the list of items
